@@ -7,25 +7,16 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import es.ucm.foodlook.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,7 +26,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
-import java.util.concurrent.ExecutorService
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        imageView = findViewById(R.id.imageView)
+        //imageView = findViewById(R.id.imageView)
         camera = findViewById(R.id.camera)
 
         initPermissions()
@@ -82,10 +72,15 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
             var image = data.extras!!.get("data") as Bitmap
-            imageView.setImageBitmap(image)
+            //imageView.setImageBitmap(image)
             lifecycleScope.launch {
                 onUploadImage(image)
             }
+            var fragment = FirstFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.container, fragment)
+            transaction.disallowAddToBackStack()
+            transaction.commit()
         }
     }
 
