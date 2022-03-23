@@ -8,4 +8,5 @@
 
     <string name="hello_first_fragment">Welcome</string>
     <string name="hello_second_fragment">Welcome. Arg: %1$s</string>
+    <string name="title_activity_result">ResultActivity</string>
 </resources>

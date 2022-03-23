@@ -73,14 +73,16 @@ class MainActivity : AppCompatActivity() {
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
             var image = data.extras!!.get("data") as Bitmap
             //imageView.setImageBitmap(image)
-            lifecycleScope.launch {
-                onUploadImage(image)
-            }
-            var fragment = FirstFragment()
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.container, fragment)
-            transaction.disallowAddToBackStack()
-            transaction.commit()
+            val intent = Intent(this, ResultActivity::class.java).apply {}
+            startActivity(intent)
+//            lifecycleScope.launch {
+//                onUploadImage(image)
+//            }
+//            var fragment = FirstFragment()
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.add(R.id.container, fragment)
+//            transaction.disallowAddToBackStack()
+//            transaction.commit()
         }
     }
 
