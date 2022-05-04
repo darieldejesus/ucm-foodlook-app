@@ -8,9 +8,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import es.ucm.foodlook.databinding.ActivityResultBinding
+import es.ucm.foodlook.types.Dish
 
 class ResultActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityResultBinding
 
@@ -21,20 +21,17 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-//
-//        val navController = findNavController(R.id.nav_host_fragment_content_result)
-//        appBarConfiguration = AppBarConfiguration(navController.graph)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
 
-//        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+        var dishes = intent.getSerializableExtra("dishes")
+
+        var fragment = ResultFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable("dishes", dishes)
+            }
+        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.result_container, fragment)
+        transaction.disallowAddToBackStack()
+        transaction.commit()
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.nav_host_fragment_content_result)
-//        return navController.navigateUp(appBarConfiguration)
-//                || super.onSupportNavigateUp()
-//    }
 }

@@ -1,0 +1,12 @@
+# Write your query or mutation here
+mutation GeneratePresignedUrl {
+  presignedUrl(input:{
+    fileName: "pepe.jpeg"
+    size: 120
+  }) {
+    fileName
+    path
+    expirationDate
+    url
+  }
+}

@@ -1,0 +1,10 @@
+query GetDetections($fileName: String!) {
+  detection(fileName: $fileName) {
+    fileName
+    path
+    lines {
+      uuid
+      query
+    }
+  }
+}
